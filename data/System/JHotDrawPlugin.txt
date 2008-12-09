@@ -12,9 +12,9 @@
 
 %TOC%
 
-This plugin encapsulates the FoswikiDraw Java Applet.
+This plugin encapsulates the JHot Draw Java Applet.
 
-<nop>JHotDraw is a simple drawing editor that supports diagramming in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
+<nop>JHot Draw is a simple drawing editor that supports diagramming in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
 
 <img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" />
 
@@ -86,9 +86,10 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 
 ---+++ Plugin Info
 
-|  Plugin Author: | Foswiki:Main/CrawfordCurrie http://www.c-dot.co.uk |
+|  Plugin Author: | Foswiki::Main.CrawfordCurrie, http://www.c-dot.co.uk |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | |
+|  9 Dec 2008 | Foswikitask:Item3345: Foswikitask:Item4823: improved the upload safety Foswikitask:Item364: rebranded Foswikitask:Item5527: support hierarchical webs in map |
 |  8570 | TWikibug:Item1528 - Minor pattern skin template update for TWikiDrawPlugin |
 |  8569 | TWikibug:Item1528 - Adding pattern skin template to TWikiDrawPlugin |
 |  7926 | TWikibug:Item1206 - minor formatting fix |
@@ -118,12 +119,12 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  Dependencies: | Java 1.1 enabled browser<br />%$DEPENDENCIES% |
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
 
-	* %TOPIC% is based on Erich Gamma's <nop>JHotDraw 5.1. (<nop>JHotDraw is copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._ )
+	* JHotDraw is Copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._
 	* %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
 	* %TOPIC% uses some ideas of <a href="http://www.eng.untech.com/serg/bin/KmWiki?Load=FrontPage">KmWiki</a> drawing applet.
 	* Copyright 2000 by Peter Thoeny, Peter@Thoeny.com. It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies.
-	* Modifications Copyright &copy; 2001 Motorola. All Rights Reserved.
-	* Modifications &copy; 2003-2004 Copyright Crawford Currie http://www.c-dot.co.uk
+	* Copyright &copy; 2001 Motorola. All Rights Reserved.
+	* Copyright &copy; 2003-2008 Crawford Currie http://www.c-dot.co.uk
 	* Foswiki version: &copy; 2008 Foswiki Contributors
 
 

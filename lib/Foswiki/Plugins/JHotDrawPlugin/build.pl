@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# Build file for Foswiki Draw Plugin
+# Build file for JHot Draw Plugin
 #
 # Standard preamble
 BEGIN {
@@ -12,13 +12,12 @@ BEGIN {
 use Foswiki::Contrib::Build;
 
 # Declare our build package
-package FoswikiDrawPluginBuild;
-
-@FoswikiDrawPluginBuild::ISA = ( "Foswiki::Contrib::Build" );
+package JHotDrawPluginBuild;
+use base 'Foswiki::Contrib::Build';
 
 sub new {
     my $class = shift;
-    return bless( $class->SUPER::new( "FoswikiDrawPlugin" ), $class );
+    return bless( $class->SUPER::new( "JHotDrawPlugin" ), $class );
 }
 
 # Override the build target to build the java code
@@ -27,13 +26,13 @@ sub target_build {
 
   $this->SUPER::target_build();
 
-  $this->pushd($this->{basedir}."/lib/Foswiki/Plugins/FoswikiDrawPlugin");
+  $this->pushd($this->{basedir}."/lib/Foswiki/Plugins/JHotDrawPlugin");
   $this->sys_action("ant", "-f", "build.xml", "build");
   $this->popd();
 }
 
 # Create the build object
-$build = new FoswikiDrawPluginBuild();
+$build = new JHotDrawPluginBuild();
 
 # Build the target on the command line, or the default target
 

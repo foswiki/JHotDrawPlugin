@@ -1,7 +1,7 @@
-<!-- ANTfile for FoswikiDrawPlugin
+<!-- ANTfile for JHotDrawPlugin
   Ant is at http://jakarta.apache.org
 -->
-<project name="FoswikiDrawPlugin" default="build" basedir="../../../..">
+<project name="JHotDrawPlugin" default="build" basedir="../../../..">
 
     <property environment="ENV"/>
     <property name="foswiki" value="${ENV.FOSWIKI_HOME}"/>
@@ -12,7 +12,7 @@
     <property name="plugin.lib" value="${lib.plugins}/${ant.project.name}"/>
     <property name="plugin.pub" value="${pub.plugins}/${ant.project.name}"/>
     <property name="plugin.data" value="${data.plugins}/${ant.project.name}"/>
-    <property name="jar.file" value="${plugin.pub}/foswikidraw.jar"/>
+    <property name="jar.file" value="${plugin.pub}/jhotdraw.jar"/>
     <property name="source.zip" value="${plugin.lib}/source.zip"/>
     <property name="release.zip" value="${ant.project.name}.zip" />
     <property name="classes" value="${plugin.lib}/classes"/>
