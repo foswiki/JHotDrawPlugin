@@ -1,5 +1,5 @@
 /*
- * @(#)FoswikiDraw.java 5.1
+ * @(#)JHotDraw.java 5.1
  * Copyright 2000 by Peter Thoeny, Peter@Thoeny.com.
  * It is hereby granted that this software can be used, copied, 
  * modified, and distributed without fee provided that this 
@@ -48,7 +48,7 @@ public class FoswikiFrame extends DrawFrame {
     private boolean bPostEnabled = true;
     
     public FoswikiFrame(Application applet, String colors) {
-        super("FoswikiDraw", applet);
+        super("JHotDraw", applet);
         
         this.view().setBackground(Color.white);
         
@@ -521,7 +521,7 @@ public class FoswikiFrame extends DrawFrame {
     
     /** debugging messages */
     static void debug(String msg) {
-    	System.err.println("FoswikiDraw:" + msg);
+    	System.err.println("JHotDraw:" + msg);
     }
     
     /**

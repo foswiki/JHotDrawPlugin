@@ -19,7 +19,7 @@
 #
 # As per the GPL, removal of this notice is prohibited.
 
-package Foswiki::Plugins::FoswikiDrawPlugin;
+package Foswiki::Plugins::JHotDrawPlugin;
 
 our $VERSION = '$Rev: 8154 $';
 our $RELEASE = '9 Dec 2008';
@@ -50,11 +50,11 @@ sub _handleDrawingMacro {
     if ($canEdit ) {
         $editUrl = Foswiki::Func::getScriptUrl(
             $web, $topic, 'oops',
-            template => 'foswikidraw',
+            template => 'jhotdraw',
             param1 => $drawingName);
         $editLinkParams->{href} = $editUrl;
         $edittext = Foswiki::Func::getPreferencesValue(
-            "FOSWIKIDRAWPLUGIN_EDIT_TEXT" ) ||
+            "JHOTDRAWPLUGIN_EDIT_TEXT" ) ||
               "Edit drawing using Java applet (requires a Java enabled browser)";
         $edittext =~ s/%F%/$drawingName/g;
     }
@@ -76,7 +76,7 @@ sub _handleDrawingMacro {
 
         # Add an edit link just above the image if required
         my $editButton = Foswiki::Func::getPreferencesValue(
-            "FOSWIKIDRAWPLUGIN_EDIT_BUTTON" );
+            "JHOTDRAWPLUGIN_EDIT_BUTTON" );
 
         if ( $canEdit && $editButton ) {
             $result = CGI::br().CGI::a($editLinkParams, 'Edit').CGI::br();
