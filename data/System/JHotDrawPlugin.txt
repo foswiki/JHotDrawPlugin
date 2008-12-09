@@ -10,13 +10,12 @@
    Instead, you could check your fix in, raise a bug in the Bugs web, or mail thge author.
 -->
 
+<img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" style="float:right" />
 %TOC%
 
 This plugin encapsulates the JHot Draw Java Applet.
 
 <nop>JHot Draw is a simple drawing editor that supports diagramming in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
-
-<img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" />
 
 A drawing can also have a "map" which makes figures in the drawing sensitive to the mouse cursor. A map is automatically added to an image when a URL is attached to any of the figures.
 
