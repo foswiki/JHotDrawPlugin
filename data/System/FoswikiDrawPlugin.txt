@@ -12,21 +12,20 @@
 
 %TOC%
 
-This plugin encapsulates the <nop>FoswikiDraw Java Applet first developed by TWiki:Main/PeterThoeny from the original <nop>JHotDraw.
+This plugin encapsulates the FoswikiDraw Java Applet.
 
-<nop>JHotDraw is a simple drawing editor that supports drawing in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
+<nop>JHotDraw is a simple drawing editor that supports diagramming in a style similar to that found in MS Powerpoint and MS Word. Various shaped figures can be placed in the drawing and text annotations joined to them.
 
 <img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" />
 
-Unique to <nop>%TOPIC%, a drawing can also have a "map" which makes figures in the drawing sensitive to the mouse cursor. A map is automatically added to an image when a URL is attached to any of the figures.
+A drawing can also have a "map" which makes figures in the drawing sensitive to the mouse cursor. A map is automatically added to an image when a URL is attached to any of the figures.
 
 How you edit a drawing depends on whether the drawing has a map and the setting of the "EDIT_BUTTON" option. A drawing with no map can be edited simply by clicking on the drawing. A drawing with a map can be edited by clicking the edit button or, failing that, on the boundary of the image.
 
-Browser support for Java 1.1 or later required.
+Browser support for Java 1.1 or later is required.
 
----++ Syntax Rules
-
-	* Write the command =%<nop>DRAWING{name}%= anywhere in a Foswiki topic. You can name the drawing anything you like, allowed characters are =A-Z a-z 0-9 _ - .= . If you have only one drawing in the topic you can simply write =%<nop>DRAWING%= .
+---++ Syntax
+	* Write the macro =%<nop>DRAWING{name}%= anywhere in a Foswiki topic. You can name the drawing anything you like, subject to the usual rules for naming attachments.
 
 ---+++ Tools
 
@@ -76,12 +75,7 @@ Edit text defined here so you can change it for local languages. Text is shown w
 	* Set EDIT_TEXT = Edit drawing '%F%' (requires a Java 1.1 enabled browser)
 
 ---+++ Plugin Installation Instructions
-
-	* Download the ZIP file from the Plugin web (see below). Contents:
-	| *File:* | *Description:* |
-%$MANIFEST%
-	* Unzip ==%TOPIC%.zip== in your Foswiki installation directory.
-	* (Dakar) Visit =configure= in your Foswiki installation, and enable the plugin in the {Plugins} section.
+%$INSTALL_INSTRUCTIONS%
 	* To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. Click on it.<br />
 	%DRAWING{empty}%
 	* Here's an example using an image map. Move the mouse over the image and watch the status bar.
@@ -123,10 +117,6 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  23 Sep 2001 | Initial version |
 |  Dependencies: | Java 1.1 enabled browser<br />%$DEPENDENCIES% |
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
-|  Feedback: | http://foswiki.org/Extensions/%TOPIC%Dev |
-|  Appraisal: | http://foswiki.org/Extensions/%TOPIC%Appraisal |
-
-__Related Topics:__ %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences, [[%SYSTEMWEB%.Plugins][Plugins]]
 
 	* %TOPIC% is based on Erich Gamma's <nop>JHotDraw 5.1. (<nop>JHotDraw is copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._ )
 	* %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
@@ -135,6 +125,5 @@ __Related Topics:__ %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences, 
 	* Modifications Copyright &copy; 2001 Motorola. All Rights Reserved.
 	* Modifications &copy; 2003-2004 Copyright Crawford Currie http://www.c-dot.co.uk
 	* Foswiki version: &copy; 2008 Foswiki Contributors
- 
--- Foswiki:Main/CrawfordCurrie - %$DATE%
+
 

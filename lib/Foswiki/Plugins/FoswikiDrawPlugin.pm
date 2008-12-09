@@ -21,105 +21,92 @@
 
 package Foswiki::Plugins::FoswikiDrawPlugin;
 
-use vars qw(
-        $web $topic $user $installWeb $VERSION $RELEASE $editButton
-    );
-
-# This should always be $Rev: 8154 $ so that Foswiki can determine the checked-in
-# status of the plugin. It is used by the build automation tools, so
-# you should leave it alone.
-$VERSION = '$Rev: 8154 $';
-
-# This is a free-form string you can use to "name" your own plugin version.
-# It is *not* used by the build automation tools, but is reported as part
-# of the version number in PLUGINDESCRIPTIONS.
-$RELEASE = 'Dakar';
-
-my $editmess;
+our $VERSION = '$Rev: 8154 $';
+our $RELEASE = '9 Dec 2008';
 
 sub initPlugin {
-  ( $topic, $web, $user, $installWeb ) = @_;
-
-  # check for Plugins.pm versions
-  if( $Foswiki::Plugins::VERSION < 1 ) {
-	Foswiki::Func::writeWarning( "Version mismatch between FoswikiDrawPlugin and Plugins.pm" );
-	return 0;
-  }
-
-  # Get plugin debug flag
-  $editButton = Foswiki::Func::getPreferencesValue( "FOSWIKIDRAWPLUGIN_EDIT_BUTTON" );
-  $editmess = Foswiki::Func::getPreferencesValue( "FOSWIKIDRAWPLUGIN_EDIT_TEXT" ) ||
-    "Edit drawing using Foswiki Draw applet (requires a Java 1.1 enabled browser)";
-  $editmess =~ s/['"]/`/g;
-
-  return 1;
+    Foswiki::Func::registerTagHandler( 'DRAWING', \&_handleDrawingMacro );
+    # Don't need a REST handler, we just use upload
+    return 1;
 }
 
-sub handleDrawing {
-  my( $attributes, $topic, $web ) = @_;
-  my $nameVal = Foswiki::Func::extractNameValuePair( $attributes );
-  if( ! $nameVal ) {
-	$nameVal = "untitled";
-  }
-  $nameVal =~ s/[^A-Za-z0-9_\.\-]//go; # delete special characters
+sub _handleDrawingMacro {
+    my( $session, $attributes, $topic, $web ) = @_;
 
-  # should really use Foswiki server-side include mechanism....
-  my $mapFile = Foswiki::Func::getPubDir() . "/$web/$topic/$nameVal.map";
-  my $img = "src=\"%ATTACHURLPATH%/$nameVal.gif\"";
-  my $editUrl =
-	Foswiki::Func::getOopsUrl($web, $topic, "foswikidraw", $nameVal);
-  my $imgText = "";
-  my $edittext = $editmess;
-  $edittext =~ s/%F%/$nameVal/g;
-  my $hover =
-    "onmouseover=\"window.status='$edittext';return true;\" ".
-      "onmouseout=\"window.status='';return true;\"";
+    my $drawingName = $attributes->{_DEFAULT} || 'untitled';
+    $drawingName =~ Foswiki::Func::sanitizeAttachmentName($drawingName);
 
-  if ( -e $mapFile ) {
-	my $mapname = $nameVal;
-	$mapname =~ s/^.*\/([^\/]+)$/$1/;
-	$img .= " usemap=\"#$mapname\"";
-	my $map = Foswiki::Func::readFile($mapFile);
-    # Unashamed hack to handle Web.TopicName links
-    $map =~ s/href=\"((\w+)\.)?(\w+)(#\w+)?\"/&_processHref($2,$3,$4,$web)/ge;
-	$map = Foswiki::Func::expandCommonVariables( $map, $topic );
-	$map =~ s/%MAPNAME%/$mapname/g;
-	$map =~ s/%FOSWIKIDRAW%/$editUrl/g;
-	$map =~ s/%EDITTEXT%/$edittext/g;
-	$map =~ s/%HOVER%/$hover/g;
-	$map =~ s/[\r\n]+//g;
+    my $mapFile = "$drawingName.map";
+    my $imgParams = { src => "%ATTACHURLPATH%/$drawingName.gif" };
 
-	# Add an edit link just above the image if required
-	$imgText = "<br /><a href=\"$editUrl\" $hover>".
-          "Edit</a><br />" if ( $editButton == 1 );
-#	$imgText = "<br /><button onclick=\"window.location='$editUrl'\" $hover>".
-#          "Edit</button><br />" if ( $editButton == 1 );
-	$imgText .= "<img $img>$map";
-  } else {
-	# insensitive drawing; the whole image gets a rather more
-	# decorative version of the edit URL
-	$imgText = "<a href=\"$editUrl\" $hover>".
-          "<img $img $hover alt=\"$edittext\" title=\"$edittext\" /></a>";
-#	$imgText = "<br /><button onclick=\"window.location='$editUrl'\" $hover>".
-#          "$edittext</button><br />" if ( $editButton == 1 );
-  }
-  return $imgText;
+    # The edit URL is an oops script which is unauthenticated, so we have
+    # to be sure we can change the topic before we can offer to edit
+    my $canEdit = Foswiki::Func::checkAccessPermission(
+        'CHANGE', Foswiki::Func::getCanonicalUserID(), undef, $topic, $web);
+
+    my $editUrl = '';
+    my $editLinkParams = {};
+    my $edittext = 'Edit access denied';
+    if ($canEdit ) {
+        $editUrl = Foswiki::Func::getScriptUrl(
+            $web, $topic, 'oops',
+            template => 'foswikidraw',
+            param1 => $drawingName);
+        $editLinkParams->{href} = $editUrl;
+        $edittext = Foswiki::Func::getPreferencesValue(
+            "FOSWIKIDRAWPLUGIN_EDIT_TEXT" ) ||
+              "Edit drawing using Java applet (requires a Java enabled browser)";
+        $edittext =~ s/%F%/$drawingName/g;
+    }
+
+    my $result = '';
+    if ( Foswiki::Func::attachmentExists($web, $topic, $mapFile )) {
+        my $map = Foswiki::Func::readAttachment($web, $topic, $mapFile);
+
+        my $mapname = $drawingName;
+        $imgParams->{usemap} = "#$mapname";
+
+        # Unashamed hack to handle Web.TopicName links
+        $map =~ s!href=(["'])(.*?)\1!_processHref($2, $web)!ge;
+
+        Foswiki::Func::setPreferencesValue('MAPNAME', $mapname);
+        Foswiki::Func::setPreferencesValue('FOSWIKIDRAW', $editUrl);
+        Foswiki::Func::setPreferencesValue('EDITTEXT', $edittext);
+        $map = Foswiki::Func::expandCommonVariables( $map, $topic );
+
+        # Add an edit link just above the image if required
+        my $editButton = Foswiki::Func::getPreferencesValue(
+            "FOSWIKIDRAWPLUGIN_EDIT_BUTTON" );
+
+        if ( $canEdit && $editButton ) {
+            $result = CGI::br().CGI::a($editLinkParams, 'Edit').CGI::br();
+        }
+        $result .= CGI::img($imgParams).$map;
+    } else {
+        # insensitive drawing; the whole image gets a rather more
+        # decorative version of the edit URL
+        $imgParams->{alt} = $edittext;
+        $imgParams->{title} = $edittext;
+        $result = CGI::img($imgParams);
+        if ($canEdit) {
+            $result = CGI::a({ href => $editUrl, title => $edittext },
+                             $result);
+        }
+    }
+    return $result;
 }
 
 sub _processHref {
-    my ( $web, $topic, $anchor, $defweb ) = @_;
+    my ( $link, $defweb ) = @_;
 
-    $web = $defweb unless ( $web );
-    $anchor = "" unless $anchor;
-
-    return "href=\"%SCRIPTURLPATH%/view%SCRIPTSUFFIX%/$web/$topic$anchor\"";
-}
-
-sub commonTagsHandler
-{
-  ### my ( $text, $topic, $web ) = @_;   # do not uncomment, use $_[0], $_[1]... instead
-  $_[0] =~ s/%DRAWING{(.*?)}%/&handleDrawing($1, $_[1], $_[2])/geo;
-  $_[0] =~ s/%DRAWING%/&handleDrawing("untitled", $_[1], $_[2])/geo;
+    if ($link =~ m!^$Foswiki::regex{webNameRegex}\..*?(#\w+)$!) {
+        $link =~ s/(#.*)$//;
+        my $anchor = $1 || '';
+        my ($web, $topic) = Foswiki::Func::normalizeWebTopicName(
+            $defweb, $link);
+        $link = "%SCRIPTURLPATH{view}%/$web/$topic$anchor";
+    }
+    return "href=\"$link\"";
 }
 
 1;

@@ -429,8 +429,8 @@ public class FoswikiFrame extends DrawFrame {
                 // edit border is added LAST so the earlier AREAs take
                 // precedence.
                 String area = "<area shape=\"rect\" coords=\"";
-                String link = "\" href=\"%FoswikiDRAW%\" " +
-                    "alt=\"%EDITTEXT%\" title=\"%EDITTEXT%\" %HOVER% />";
+                String link = "\" href=\"%FOSWIKIDRAW%\" " +
+                    "alt=\"%EDITTEXT%\" title=\"%EDITTEXT%\" />";
                 map = "<map name=\"%MAPNAME%\">" + map +
                     
                     area +
