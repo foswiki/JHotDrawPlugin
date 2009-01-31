@@ -75,7 +75,7 @@ Edit text defined here so you can change it for local languages. Text is shown w
 
 ---+++ Plugin Installation Instructions
 %$INSTALL_INSTRUCTIONS%
-	* To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. Click on it.<br />
+	* To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. <br />
 	%DRAWING{empty}%
 	* Here's an example using an image map. Move the mouse over the image and watch the status bar.
 	%DRAWING{example}%
@@ -89,6 +89,7 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | |
+|  31 Jan 2009 | Foswikitask:Item415: must check user is authenticated as well as checking change access |
 |  9 Dec 2008 | Foswikitask:Item3345: Foswikitask:Item4823: improved the upload safety Foswikitask:Item364: rebranded Foswikitask:Item5527: support hierarchical webs in map |
 |  8570 | TWikibug:Item1528 - Minor pattern skin template update for TWikiDrawPlugin |
 |  8569 | TWikibug:Item1528 - Adding pattern skin template to TWikiDrawPlugin |

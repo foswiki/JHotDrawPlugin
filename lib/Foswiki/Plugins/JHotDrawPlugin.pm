@@ -41,8 +41,11 @@ sub _handleDrawingMacro {
 
     # The edit URL is an oops script which is unauthenticated, so we have
     # to be sure we can change the topic before we can offer to edit
-    my $canEdit = Foswiki::Func::checkAccessPermission(
-        'CHANGE', Foswiki::Func::getCanonicalUserID(), undef, $topic, $web);
+    my $canEdit =
+      Foswiki::Func::getContext()->{authenticated}
+          && Foswiki::Func::checkAccessPermission(
+              'CHANGE', Foswiki::Func::getCanonicalUserID(),
+              undef, $topic, $web);
 
     my $editUrl = '';
     my $editLinkParams = {};
