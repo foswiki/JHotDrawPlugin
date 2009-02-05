@@ -3,7 +3,7 @@
 # Copyright (C) 2000-2001 Andrea Sterbini, a.sterbini@flashnet.it
 # Copyright (C) 2001-2006 Peter Thoeny, Peter@Thoeny.org
 # Copyright (C) 2002-2006 Crawford Currie, cc@c-dot.co.uk
-# Copyright (C) 2008 Foswiki Contributors
+# Copyright (C) 2008-2009 Foswiki Contributors
 #
 # For licensing info read LICENSE file in the Foswiki root.
 # This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@
 package Foswiki::Plugins::JHotDrawPlugin;
 
 our $VERSION = '$Rev: 8154 $';
-our $RELEASE = '9 Dec 2008';
+our $RELEASE = '05 Feb 2009';
 
 sub initPlugin {
     Foswiki::Func::registerTagHandler( 'DRAWING', \&_handleDrawingMacro );
@@ -75,6 +75,12 @@ sub _handleDrawingMacro {
         Foswiki::Func::setPreferencesValue('MAPNAME', $mapname);
         Foswiki::Func::setPreferencesValue('FOSWIKIDRAW', $editUrl);
         Foswiki::Func::setPreferencesValue('EDITTEXT', $edittext);
+        
+        # Handle if drawing is imported from a T*iki installation  
+        if ( $map =~ /%TWIKIDRAW%/ ) {
+            Foswiki::Func::setPreferencesValue('TWIKIDRAW', $editUrl);
+        }
+        
         $map = Foswiki::Func::expandCommonVariables( $map, $topic );
 
         # Add an edit link just above the image if required
@@ -101,14 +107,21 @@ sub _handleDrawingMacro {
 
 sub _processHref {
     my ( $link, $defweb ) = @_;
-
-    if ($link =~ m!^$Foswiki::regex{webNameRegex}\..*?(#\w+)$!) {
-        $link =~ s/(#.*)$//;
-        my $anchor = $1 || '';
+    
+    # Skip processing naked anchor links, protocol links, and special macros
+    unless ( $link =~ m/^(%FOSWIKIDRAW%|%TWIKIDRAW%|#|$Foswiki::cfg{LinkProtocolPattern})/ ) {
+   
+        my $anchor = '';
+        if ( $link =~ s/(#.*)$// ) {
+            $anchor = $1;
+        }
+    
         my ($web, $topic) = Foswiki::Func::normalizeWebTopicName(
-            $defweb, $link);
+                $defweb, $link);
+        
         $link = "%SCRIPTURLPATH{view}%/$web/$topic$anchor";
     }
+    
     return "href=\"$link\"";
 }
 
