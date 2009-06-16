@@ -22,7 +22,7 @@
 package Foswiki::Plugins::JHotDrawPlugin;
 
 our $VERSION = '$Rev: 8154 $';
-our $RELEASE = '05 Feb 2009';
+our $RELEASE = '16 Jun 2009';
 
 sub initPlugin {
     Foswiki::Func::registerTagHandler( 'DRAWING', \&_handleDrawingMacro );
@@ -34,7 +34,7 @@ sub _handleDrawingMacro {
     my( $session, $attributes, $topic, $web ) = @_;
 
     my $drawingName = $attributes->{_DEFAULT} || 'untitled';
-    $drawingName =~ Foswiki::Func::sanitizeAttachmentName($drawingName);
+    $drawingName = ( Foswiki::Func::sanitizeAttachmentName($drawingName) )[0];
 
     my $mapFile = "$drawingName.map";
     my $imgParams = { src => "%ATTACHURLPATH%/$drawingName.gif" };
