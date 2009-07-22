@@ -1,14 +1,5 @@
 %META:TOPICINFO{author="ProjectContributor" date="1144799477" format="1.0" version="1.1"}%
 ---+!! <nop>%TOPIC%
-<!--
-
-   PLEASE DO NOT EDIT THIS TOPIC
-
-   It is automatically generated from the subversion repository, and any changes
-   you make will simply be overwritten the next time a release is generated.
-
-   Instead, you could check your fix in, raise a bug in the Bugs web, or mail thge author.
--->
 
 <img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" style="float:right" />
 %TOC%
@@ -64,8 +55,9 @@ The standard commands that are provided include cut, copy, paste, duplicate, del
 Attributes, such as fill color, text color or arrow tip, can be changed through the attributes menus.
 
 ---++ <nop>%TOPIC% Settings
-
-	* Set SHORTDESCRIPTION = Java Applet based drawing editor
+<!--
+	* Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
 Extra colors to be added to the menu of colors in the applet, as a comma-separated list with colors in HTML format (see %SYSTEMWEB%.StandardColors)
 	* Set EXTRA_COLORS = Aquamarine=#70DB93,New Tan=#EBC79E,Sea Green=#238E68,Motorola Blue=#3ff
 Set to 1 if an "Edit" button is to be generated attached to the image. You will still be able to edit it by clicking on the boundary of the image.
@@ -85,9 +77,10 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 
 ---+++ Plugin Info
 
-|  Plugin Author: | Foswiki::Main.CrawfordCurrie, http://www.c-dot.co.uk |
+|  Author: | Foswiki::Main.CrawfordCurrie, http://www.c-dot.co.uk |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | %$VERSION% |
+|  Version: | %$VERSION% |
+|  Release: | %$RELEASE% |
 |  Change History: | |
 |  16 Jun 2009 | Foswikitask:Item8079: handling of drawing names with spaces and other converted characters corrected |
 |  05 Feb 2009 | Foswikitask:Item997: must be able to show edit link correctly on imported TWiki drawings. Foswikitask:Item997: fixed problem with links in maps when the link had no trailing anchor introduced in previous version. The fix also enables using macros in links. |

@@ -21,17 +21,19 @@
 
 package Foswiki::Plugins::JHotDrawPlugin;
 
-our $VERSION = '$Rev: 8154 $';
+our $VERSION = '$Rev$';
 our $RELEASE = '16 Jun 2009';
+our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
     Foswiki::Func::registerTagHandler( 'DRAWING', \&_handleDrawingMacro );
+
     # Don't need a REST handler, we just use upload
     return 1;
 }
 
 sub _handleDrawingMacro {
-    my( $session, $attributes, $topic, $web ) = @_;
+    my ( $session, $attributes, $topic, $web ) = @_;
 
     my $drawingName = $attributes->{_DEFAULT} || 'untitled';
     $drawingName = ( Foswiki::Func::sanitizeAttachmentName($drawingName) )[0];
@@ -41,30 +43,30 @@ sub _handleDrawingMacro {
 
     # The edit URL is an oops script which is unauthenticated, so we have
     # to be sure we can change the topic before we can offer to edit
-    my $canEdit =
-      Foswiki::Func::getContext()->{authenticated}
-          && Foswiki::Func::checkAccessPermission(
-              'CHANGE', Foswiki::Func::getCanonicalUserID(),
-              undef, $topic, $web);
+    my $canEdit = Foswiki::Func::getContext()->{authenticated}
+      && Foswiki::Func::checkAccessPermission( 'CHANGE',
+        Foswiki::Func::getCanonicalUserID(),
+        undef, $topic, $web );
 
-    my $editUrl = '';
+    my $editUrl        = '';
     my $editLinkParams = {};
-    my $edittext = 'Edit access denied';
-    if ($canEdit ) {
+    my $edittext       = 'Edit access denied';
+    if ($canEdit) {
         $editUrl = Foswiki::Func::getScriptUrl(
             $web, $topic, 'oops',
             template => 'jhotdraw',
-            param1 => $drawingName);
+            param1   => $drawingName
+        );
         $editLinkParams->{href} = $editUrl;
-        $edittext = Foswiki::Func::getPreferencesValue(
-            "JHOTDRAWPLUGIN_EDIT_TEXT" ) ||
-              "Edit drawing using Java applet (requires a Java enabled browser)";
+        $edittext =
+          Foswiki::Func::getPreferencesValue("JHOTDRAWPLUGIN_EDIT_TEXT")
+          || "Edit drawing using Java applet (requires a Java enabled browser)";
         $edittext =~ s/%F%/$drawingName/g;
     }
 
     my $result = '';
-    if ( Foswiki::Func::attachmentExists($web, $topic, $mapFile )) {
-        my $map = Foswiki::Func::readAttachment($web, $topic, $mapFile);
+    if ( Foswiki::Func::attachmentExists( $web, $topic, $mapFile ) ) {
+        my $map = Foswiki::Func::readAttachment( $web, $topic, $mapFile );
 
         my $mapname = $drawingName;
         $imgParams->{usemap} = "#$mapname";
@@ -72,34 +74,36 @@ sub _handleDrawingMacro {
         # Unashamed hack to handle Web.TopicName links
         $map =~ s!href=(["'])(.*?)\1!_processHref($2, $web)!ge;
 
-        Foswiki::Func::setPreferencesValue('MAPNAME', $mapname);
-        Foswiki::Func::setPreferencesValue('FOSWIKIDRAW', $editUrl);
-        Foswiki::Func::setPreferencesValue('EDITTEXT', $edittext);
-        
-        # Handle if drawing is imported from a T*iki installation  
+        Foswiki::Func::setPreferencesValue( 'MAPNAME',     $mapname );
+        Foswiki::Func::setPreferencesValue( 'FOSWIKIDRAW', $editUrl );
+        Foswiki::Func::setPreferencesValue( 'EDITTEXT',    $edittext );
+
+        # Handle if drawing is imported from a T*iki installation
         if ( $map =~ /%TWIKIDRAW%/ ) {
-            Foswiki::Func::setPreferencesValue('TWIKIDRAW', $editUrl);
+            Foswiki::Func::setPreferencesValue( 'TWIKIDRAW', $editUrl );
         }
-        
+
         $map = Foswiki::Func::expandCommonVariables( $map, $topic );
 
         # Add an edit link just above the image if required
-        my $editButton = Foswiki::Func::getPreferencesValue(
-            "JHOTDRAWPLUGIN_EDIT_BUTTON" );
+        my $editButton =
+          Foswiki::Func::getPreferencesValue("JHOTDRAWPLUGIN_EDIT_BUTTON");
 
         if ( $canEdit && $editButton ) {
-            $result = CGI::br().CGI::a($editLinkParams, 'Edit').CGI::br();
+            $result = CGI::br() . CGI::a( $editLinkParams, 'Edit' ) . CGI::br();
         }
-        $result .= CGI::img($imgParams).$map;
-    } else {
+        $result .= CGI::img($imgParams) . $map;
+    }
+    else {
+
         # insensitive drawing; the whole image gets a rather more
         # decorative version of the edit URL
-        $imgParams->{alt} = $edittext;
+        $imgParams->{alt}   = $edittext;
         $imgParams->{title} = $edittext;
-        $result = CGI::img($imgParams);
+        $result             = CGI::img($imgParams);
         if ($canEdit) {
-            $result = CGI::a({ href => $editUrl, title => $edittext },
-                             $result);
+            $result =
+              CGI::a( { href => $editUrl, title => $edittext }, $result );
         }
     }
     return $result;
@@ -107,21 +111,23 @@ sub _handleDrawingMacro {
 
 sub _processHref {
     my ( $link, $defweb ) = @_;
-    
+
     # Skip processing naked anchor links, protocol links, and special macros
-    unless ( $link =~ m/^(%FOSWIKIDRAW%|%TWIKIDRAW%|#|$Foswiki::cfg{LinkProtocolPattern})/ ) {
-   
+    unless ( $link =~
+        m/^(%FOSWIKIDRAW%|%TWIKIDRAW%|#|$Foswiki::cfg{LinkProtocolPattern})/ )
+    {
+
         my $anchor = '';
         if ( $link =~ s/(#.*)$// ) {
             $anchor = $1;
         }
-    
-        my ($web, $topic) = Foswiki::Func::normalizeWebTopicName(
-                $defweb, $link);
-        
+
+        my ( $web, $topic ) =
+          Foswiki::Func::normalizeWebTopicName( $defweb, $link );
+
         $link = "%SCRIPTURLPATH{view}%/$web/$topic$anchor";
     }
-    
+
     return "href=\"$link\"";
 }
 
