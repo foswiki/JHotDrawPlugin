@@ -392,15 +392,11 @@ public class DrawApplet
             fSelectedToolButton.select();
     }
 
-    protected void loadDrawing(String param) {
-        if (param == fgUntitled) {
+    protected void loadDrawing(String filename) {
+        if (filename == null) {
             fDrawing.release();
             initDrawing();
-            return;
-        }
-
-        String filename = getParameter(param);
-        if (filename != null)
+        } else
             readDrawing(filename);
     }
 

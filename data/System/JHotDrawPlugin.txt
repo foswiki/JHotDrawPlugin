@@ -82,6 +82,7 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
 |  Change History: | |
+|  8 Oct 2009 | Foswiki:Tasks:Item2160: compatibility with 1.0.7, plus UI and upload performance improvements |
 |  16 Jun 2009 | Foswikitask:Item8079: handling of drawing names with spaces and other converted characters corrected |
 |  05 Feb 2009 | Foswikitask:Item997: must be able to show edit link correctly on imported TWiki drawings. Foswikitask:Item997: fixed problem with links in maps when the link had no trailing anchor introduced in previous version. The fix also enables using macros in links. |
 |  31 Jan 2009 | Foswikitask:Item415: must check user is authenticated as well as checking change access |

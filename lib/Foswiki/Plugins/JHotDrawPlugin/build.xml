@@ -50,9 +50,15 @@
 	    </javac>
         <jar jarfile="${jar.file}" basedir="${classes}" />
     </target>
-
+    
+    <target name="run" depends="build">
+        <java classpath="${classes}" classname="CH.ifa.draw.foswiki.StandAlone" fork="true">
+            <arg value="drawingurl=."/>
+        </java>
+    </target>
+    
     <target name="clean" description="Cleanup all generated files">
-		<delete dir="${classes}" />
+	<delete dir="${classes}" />
         <delete file="${source.zip}" />
         <delete file="${jar.file}" />
     </target>

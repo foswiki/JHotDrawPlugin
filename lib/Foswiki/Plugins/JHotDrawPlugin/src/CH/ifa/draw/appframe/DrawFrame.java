@@ -7,7 +7,6 @@
  * copyright notice appears in all copies.
  * Portions Copyright (C) 2001 Motorola - All rights reserved
  */
-
 package CH.ifa.draw.appframe;
 
 import java.awt.*;
@@ -28,71 +27,64 @@ import CH.ifa.draw.util.*;
  * and is designed to be overridden to add extra menus and buttons.
  */
 public class DrawFrame extends Frame
-    implements DrawingEditor, PaletteListener {
+        implements DrawingEditor, PaletteListener {
 
-    transient private Drawing         fDrawing;
-    transient private Tool            fTool;
-
+    transient private Drawing fDrawing;
+    transient private Tool fTool;
     transient private StandardDrawingView fView;
-    transient private ToolButton      fDefaultToolButton;
-    transient private ToolButton      fSelectedToolButton;
-
-    transient private boolean         fSimpleUpdate;
-    transient private Button          fUpdateButton;
-
-    transient private Panel	      fPanel;
-
-    private Iconkit                   fIconkit;
-
-    static String                     fgUntitled = "untitled";
-
-    private static final String       fgDrawPath = "/CH/ifa/draw/";
-    public static final String        IMAGES = fgDrawPath+"images/";
-
-    private Application       fApplication;
+    transient private ToolButton fDefaultToolButton;
+    transient private ToolButton fSelectedToolButton;
+    transient private boolean fSimpleUpdate;
+    transient private Button fUpdateButton;
+    transient private Panel fPanel;
+    private Iconkit fIconkit;
+    static String fgUntitled = "untitled";
+    private static final String fgDrawPath = "/CH/ifa/draw/";
+    public static final String IMAGES = fgDrawPath + "images/";
+    private Application fApplication;
 
     public DrawFrame(String title, Application application) {
-	super(title);
+        super(title);
 
-	fApplication = application;
+        fApplication = application;
 
         fIconkit = new Iconkit(this);
 
-	setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         fView = createDrawingView();
 
-	MenuBar mb = new MenuBar();
+        MenuBar mb = new MenuBar();
         populateMenuBar(mb);
-	setMenuBar(mb);
+        setMenuBar(mb);
 
-	Panel panel = createSouthPanel();
-	if (panel != null) {
-	    populateSouthPanel(panel);
-	    add("South", panel);
-	}
+        Panel panel = createSouthPanel();
+        if (panel != null) {
+            populateSouthPanel(panel);
+            add("South", panel);
+        }
 
-	panel = createWestPanel();
-	if (panel != null) {
-	    populateWestPanel(panel);
-	    add("West", panel);
-	}
+        panel = createWestPanel();
+        if (panel != null) {
+            populateWestPanel(panel);
+            add("West", panel);
+        }
 
-	panel = createEastPanel();
-	if (panel != null) {
-	    populateEastPanel(panel);
-	    add("East", panel);
-	}
+        panel = createEastPanel();
+        if (panel != null) {
+            populateEastPanel(panel);
+            add("East", panel);
+        }
 
-	panel = createNorthPanel();
-	if (panel != null) {
-	    populateNorthPanel(panel);
-	    add("North", panel);
-	}
+        panel = createNorthPanel();
+        if (panel != null) {
+            populateNorthPanel(panel);
+            add("North", panel);
+        }
 
-	ScrollPane sp = new ScrollPane();
-	sp.add(fView);
-	add("Center", sp);
+        ScrollPane sp = new ScrollPane();
+        sp.add(fView);
+        add("Center", sp);
 
         initDrawing();
         setBufferedDisplayUpdate();
@@ -100,11 +92,11 @@ public class DrawFrame extends Frame
     }
 
     public Application getApplication() {
-	return fApplication;
+        return fApplication;
     }
 
     public void showStatus(String s) {
-	fApplication.showStatus(s);
+        fApplication.showStatus(s);
     }
 
     protected void populateMenuBar(MenuBar mb) {
@@ -115,7 +107,7 @@ public class DrawFrame extends Frame
      */
     protected Panel createSouthPanel() {
         Panel panel = new Panel();
-        panel.setLayout(new PaletteLayout(2, new Point(2,2), false));
+        panel.setLayout(new PaletteLayout(2, new Point(2, 2), false));
         return panel;
     }
 
@@ -125,34 +117,37 @@ public class DrawFrame extends Frame
      * @param panel the buttons panel.
      */
     protected void populateSouthPanel(Panel panel) {
-        panel.add(new Filler(24,20));
+        panel.add(new Filler(24, 20));
 
         Choice drawingChoice = new Choice();
         drawingChoice.addItem(fgUntitled);
 
-	String param = fApplication.getParameter("DRAWINGS");
-	if (param == null)
-	    param = "";
-       	StringTokenizer st = new StringTokenizer(param);
-        while (st.hasMoreTokens())
+        String param = fApplication.getParameter("DRAWINGS");
+        if (param == null) {
+            param = "";
+        }
+        StringTokenizer st = new StringTokenizer(param);
+        while (st.hasMoreTokens()) {
             drawingChoice.addItem(st.nextToken());
+        }
         // offer choice only if more than one
-        if (drawingChoice.getItemCount() > 1)
+        if (drawingChoice.getItemCount() > 1) {
             panel.add(drawingChoice);
-        else
+        } else {
             panel.add(new Label(fgUntitled));
+        }
 
-	drawingChoice.addItemListener(
-	    new ItemListener() {
-		    public void itemStateChanged(ItemEvent e) {
-			if (e.getStateChange() == ItemEvent.SELECTED) {
-			    loadDrawing((String)e.getItem());
-			}
-		    }
-		}
-	    );
+        drawingChoice.addItemListener(
+                new ItemListener() {
 
-        panel.add(new Filler(6,20));
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            loadDrawing((String) e.getItem());
+                        }
+                    }
+                });
+
+        panel.add(new Filler(6, 20));
 
         Button button;
         button = new CommandButton(new DeleteCommand("Delete", fView));
@@ -168,28 +163,29 @@ public class DrawFrame extends Frame
         panel.add(button);
 
         button = new Button("Help");
-	button.addActionListener(
-	    new ActionListener() {
-		    public void actionPerformed(ActionEvent event) {
-			showHelp();
-		    }
-		}
-	    );
+        button.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent event) {
+                        showHelp();
+                    }
+                });
         panel.add(button);
 
-	fUpdateButton = new Button("Simple Update");
-	fUpdateButton.addActionListener(
-	    new ActionListener() {
-		    public void actionPerformed(ActionEvent event) {
-			if (fSimpleUpdate)
-			    setBufferedDisplayUpdate();
-			else
-			    setSimpleDisplayUpdate();
-		    }
-		}
-	    );
-	
-	panel.add(fUpdateButton);
+        fUpdateButton = new Button("Simple Update");
+        fUpdateButton.addActionListener(
+                new ActionListener() {
+
+                    public void actionPerformed(ActionEvent event) {
+                        if (fSimpleUpdate) {
+                            setBufferedDisplayUpdate();
+                        } else {
+                            setSimpleDisplayUpdate();
+                        }
+                    }
+                });
+
+        panel.add(fUpdateButton);
     }
 
     /**
@@ -197,12 +193,13 @@ public class DrawFrame extends Frame
      */
     protected CommandMenu createColorMenu(String attribute) {
         CommandMenu menu = new CommandMenu("Colour");
-	ColorMap map = ColorMap.getColorMap();
-        for (int i = 0; i < map.size(); i++)
+        ColorMap map = ColorMap.getColorMap();
+        for (int i = 0; i < map.size(); i++) {
             menu.add(
-                new ChangeAttributeCommand(
+                    new ChangeAttributeCommand(
                     map.name(i), attribute,
                     map.color(i), fView));
+        }
         return menu;
     }
 
@@ -213,31 +210,31 @@ public class DrawFrame extends Frame
     protected CommandMenu createFontMenu() {
         CommandMenu menu = new CommandMenu("Font");
 
-	/** If we were able to assume 1.2 or greater, we would get
-	 * the fonts list like this:
+        /** If we were able to assume 1.2 or greater, we would get
+         * the fonts list like this:
         String[] font =
-	    GraphicsEnvironment.getLocalGraphicsEnvironment().
-	    getAvailableFontFamilyNames();
-	*/
-	
+        GraphicsEnvironment.getLocalGraphicsEnvironment().
+        getAvailableFontFamilyNames();
+         */
         String fonts[] = Toolkit.getDefaultToolkit().getFontList();
 
-        for (int i = 0; i < fonts.length; i++)
+        for (int i = 0; i < fonts.length; i++) {
             menu.add(
-		new ChangeAttributeCommand(
-		    fonts[i], "FontName", fonts[i],  fView));
+                    new ChangeAttributeCommand(
+                    fonts[i], "FontName", fonts[i], fView));
+        }
         return menu;
     }
 
     protected Panel createEastPanel() {
-	return null;
+        return null;
     }
 
     protected void populateEastPanel(Panel panel) {
     }
 
     protected Panel createNorthPanel() {
-	return null;
+        return null;
     }
 
     protected void populateNorthPanel(Panel panel) {
@@ -248,7 +245,7 @@ public class DrawFrame extends Frame
      */
     protected Panel createWestPanel() {
         Panel palette = new Panel();
-        palette.setLayout(new PaletteLayout(2,new Point(2,2)));
+        palette.setLayout(new PaletteLayout(2, new Point(2, 2)));
         return palette;
     }
 
@@ -262,7 +259,7 @@ public class DrawFrame extends Frame
         Tool tool = createSelectionTool();
 
         fDefaultToolButton = createToolButton(
-	    IMAGES+"SEL", "Selection Tool", tool);
+                IMAGES + "SEL", "Selection Tool", tool);
         palette.add(fDefaultToolButton);
     }
 
@@ -278,7 +275,7 @@ public class DrawFrame extends Frame
      * Creates a tool button with the given image, tool, and text
      */
     protected ToolButton createToolButton(String iconName,
-					  String toolName, Tool tool) {
+            String toolName, Tool tool) {
         return new ToolButton(this, iconName, toolName, tool);
     }
 
@@ -317,10 +314,11 @@ public class DrawFrame extends Frame
      * @see PaletteListener
      */
     public void paletteUserOver(PaletteButton button, boolean inside) {
-        if (inside)
+        if (inside) {
             showStatus(((ToolButton) button).name());
-        else
+        } else {
             showStatus(fSelectedToolButton.name());
+        }
     }
 
     /**
@@ -362,7 +360,7 @@ public class DrawFrame extends Frame
      * @see DrawingEditor
      */
     public void selectionChanged(DrawingView view) {
-        //setupAttributes();
+    //setupAttributes();
     }
 
     private void initDrawing() {
@@ -372,8 +370,9 @@ public class DrawFrame extends Frame
     }
 
     private void setTool(Tool t, String name) {
-        if (fTool != null)
+        if (fTool != null) {
             fTool.deactivate();
+        }
         fTool = t;
         if (fTool != null) {
             showStatus(name);
@@ -382,35 +381,34 @@ public class DrawFrame extends Frame
     }
 
     private void setSelected(ToolButton button) {
-        if (fSelectedToolButton != null)
+        if (fSelectedToolButton != null) {
             fSelectedToolButton.reset();
+        }
         fSelectedToolButton = button;
-        if (fSelectedToolButton != null)
+        if (fSelectedToolButton != null) {
             fSelectedToolButton.select();
+        }
     }
 
-    protected void loadDrawing(String param) {
-        if (param == fgUntitled) {
+    protected void loadDrawing(String filename) {
+        if (filename == null) {
             fDrawing.release();
             initDrawing();
-            return;
+        } else {
+            readDrawing(filename);
         }
-
-        String filename = fApplication.getParameter(param);
-        if (filename != null) {
-	    readDrawing(filename);
-	}
     }
 
     private void readDrawing(String filename) {
         toolDone();
         String type = guessType(filename);
-        if (type.equals("storable"))
+        if (type.equals("storable")) {
             readFromStorableInput(filename);
-        else if (type.equals("serialized"))
+        } else if (type.equals("serialized")) {
             readFromObjectInput(filename);
-        else
+        } else {
             showStatus("Unknown file type");
+        }
     }
 
     private void readFromStorableInput(String filename) {
@@ -419,11 +417,11 @@ public class DrawFrame extends Frame
             StorableInput input = new StorableInput(stream);
             fDrawing.release();
 
-            fDrawing = (Drawing)input.readStorable();
+            fDrawing = (Drawing) input.readStorable();
             fView.setDrawing(fDrawing);
         } catch (IOException e) {
             initDrawing();
-            showStatus("Error reading " + filename + ": "+e);
+            showStatus("Error reading " + filename + ": " + e);
             e.printStackTrace();
         }
     }
@@ -433,12 +431,12 @@ public class DrawFrame extends Frame
             InputStream stream = fApplication.getStream(filename);
             ObjectInput input = new ObjectInputStream(stream);
             fDrawing.release();
-            fDrawing = (Drawing)input.readObject();
+            fDrawing = (Drawing) input.readObject();
             fView.setDrawing(fDrawing);
         } catch (IOException e) {
             initDrawing();
             showStatus("Error reading (OI) " + filename + ": " + e);
-	    e.printStackTrace();
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             initDrawing();
             showStatus("Class not found: " + e);
@@ -446,10 +444,12 @@ public class DrawFrame extends Frame
     }
 
     private String guessType(String file) {
-        if (file.endsWith(".draw"))
+        if (file.endsWith(".draw")) {
             return "storable";
-        if (file.endsWith(".ser"))
+        }
+        if (file.endsWith(".ser")) {
             return "serialized";
+        }
         return "unknown";
     }
 

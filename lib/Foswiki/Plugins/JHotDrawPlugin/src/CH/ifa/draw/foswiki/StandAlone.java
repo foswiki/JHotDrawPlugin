@@ -15,6 +15,7 @@ import CH.ifa.draw.contrib.*;
 import CH.ifa.draw.appframe.*;
 
 public class StandAlone implements Application {
+
     FoswikiFrame frame;
     Hashtable params;
 
@@ -35,42 +36,35 @@ public class StandAlone implements Application {
 
     /** Implement Application */
     public void showStatus(String s) {
-        System.out.println("STATUS "+s);
+        System.out.println("STATUS " + s);
     }
 
     /** Implement Application */
     public String getParameter(String name) {
-        System.out.println("GETPARAMETER "+name+"="+params.get(name));
-        return (String)params.get(name);
-        //return super.getParameter(name);
+        System.out.println("GETPARAMETER " + name + "=" + params.get(name));
+        return (String) params.get(name);
+    //return super.getParameter(name);
     }
 
     /** Implement Application */
     public InputStream getStream(String relURL) throws IOException {
         //return new URL(getCodeBase(), relURL);
-        System.out.println("GETFILE "+relURL);
+        System.out.println("GETFILE " + relURL);
         return new FileInputStream(relURL);
     }
 
     /** Implement Application */
     public void popupFrame(String url, String title) {
         //getAppletContext().showDocument(url, title);
-        System.out.println(title + " POPUPFRAME "+url);
+        System.out.println(title + " POPUPFRAME " + url);
     }
 
-    public boolean post(String url,
-                        String fileName,
-                        String type,
-                        String path,
-                        String content,
-                        String comment) {
-        System.out.println("Post URL " + url +
-                           " fileName " + fileName +
-                           " type " + type +
-                           " path " + path +
-                           " content " + content +
-                           " comment " + comment);
-        return false;
+    public void pushSaveParam(String value) {
+        System.out.println("Save " + value);
+    }
+
+    public void commitSaves() {
+        System.out.println("Commit saves");
     }
 
     public static void main(String[] args) {
