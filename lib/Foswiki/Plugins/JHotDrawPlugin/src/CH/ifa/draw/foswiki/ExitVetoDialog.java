@@ -34,7 +34,7 @@ public class ExitVetoDialog extends Dialog implements ActionListener {
         Panel b = new Panel();
         b.setLayout(new FlowLayout());
         p.add(b);
-        b.add(ok = new Button("It's OK, I've saved"));
+        b.add(ok = new Button("Yes, exit now"));
         Button cancel = new Button("No, don't exit yet");
         b.add(cancel);
         

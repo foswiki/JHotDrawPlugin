@@ -30,7 +30,7 @@ use MIME::Base64 ();
 use Encode ();
 
 our $VERSION = '$Rev$';
-our $RELEASE = '8 Oct 2009';
+our $RELEASE = '13 Oct 2009';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
@@ -274,7 +274,6 @@ sub _restUpload {
         print STDERR "JHotDraw SAVE FAILED\n";
         returnRESTResult( $response, 500, join(' ', @errors ));
     } else {
-        print STDERR "JHotDraw saved $fileName\n";
         returnRESTResult( $response, 200, 'OK');
     }
 

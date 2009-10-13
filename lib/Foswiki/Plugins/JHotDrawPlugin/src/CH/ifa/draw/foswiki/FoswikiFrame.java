@@ -547,6 +547,7 @@ public class FoswikiFrame extends DrawFrame {
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
         app.commitSaves();
+        showStatus("Saved " + drawingName);
     }
 
     /** debugging messages */
