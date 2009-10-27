@@ -57,5 +57,7 @@ pub/System/JHotDrawPlugin/URL2.gif
 pub/System/JHotDrawPlugin/URL3.gif
 pub/System/JHotDrawPlugin/screenshot.png
 pub/System/JHotDrawPlugin/jhotdraw.jar JAR file for applet
+pub/System/JHotDrawPlugin/jhotdraw.js Compressed javascript
+pub/System/JHotDrawPlugin/jhotdraw_src.js Javascript source
 templates/jhotdraw.tmpl Template for drawing editor
 
