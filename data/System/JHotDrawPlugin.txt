@@ -77,7 +77,7 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 
 ---+++ Plugin Info
 
-|  Author: | Foswiki::Main.CrawfordCurrie, http://www.c-dot.co.uk |
+|  Author: | Foswiki::Main.CrawfordCurrie, http://www.c-dot.co.uk, based on Peter Thoeny's 2001 original (thanks Peter!) |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
@@ -113,6 +113,7 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  20 Feb 2002 | Merged TWiki:Main/RobWalker's fixes for text attached to figures |
 |  01 Oct 2001 | Updated this text |
 |  23 Sep 2001 | Initial version |
+|  2000 | Peter Thoeny created <nop>TWikiDraw based on JHotDraw (<nop>TWikiDraw applet that allows you to save a drawing as a =.draw= and a =.gif= file. New =%<nop>DRAWING%= variable to insert a drawing into any TWiki topic. New =oopstwikidraw.tmpl= template that contains the <nop>TWikiDraw applet. |
 |  Dependencies: | Java 1.1 enabled browser<br />%$DEPENDENCIES% |
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
 |  Feedback: | http://foswiki.org/Extensions/%TOPIC%Dev |
