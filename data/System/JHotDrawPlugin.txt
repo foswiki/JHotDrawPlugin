@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1144799477" format="1.0" version="1.1"}%
+%META:TOPICINFO{author="ProjectContributor" date="1144799477" format="1.1" version="1.1"}%
 ---+!! <nop>%TOPIC%
 
 <img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" style="float:right" />
@@ -15,7 +15,7 @@ How you edit a drawing depends on whether the drawing has a map and the setting 
 Browser support for Java 1.1 or later is required.
 
 ---++ Syntax
-	* Write the macro =%<nop>DRAWING{name}%= anywhere in a Foswiki topic. You can name the drawing anything you like, subject to the usual rules for naming attachments.
+   * Write the macro =%<nop>DRAWING{name}%= anywhere in a Foswiki topic. You can name the drawing anything you like, subject to the usual rules for naming attachments.
 
 ---+++ Tools
 
@@ -37,11 +37,11 @@ The tools on the left create or manipulate figures.
 ---+++ Handles
 
 When selected, figures provide different handles to manipulate them.
-	* the white squares let you to manipulate the shape of a figure
-	* the green squares on connections let you to reconnect them with another figure.
-	* the yellow circles on polygon figures let you change the size and rotation of the figure
-	* yellow circles on rounded rectangles let you change the radius of the corners
-	* the yellow circles on connections let you manipulate the position of connection segments.
+   * the white squares let you to manipulate the shape of a figure
+   * the green squares on connections let you to reconnect them with another figure.
+   * the yellow circles on polygon figures let you change the size and rotation of the figure
+   * yellow circles on rounded rectangles let you change the radius of the corners
+   * the yellow circles on connections let you manipulate the position of connection segments.
 
 ---+++ Commands
 
@@ -56,24 +56,29 @@ Attributes, such as fill color, text color or arrow tip, can be changed through 
 
 ---++ <nop>%TOPIC% Settings
 <!--
-	* Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
 -->
 Extra colors to be added to the menu of colors in the applet, as a comma-separated list with colors in HTML format (see %SYSTEMWEB%.StandardColors)
-	* Set EXTRA_COLORS = Aquamarine=#70DB93,New Tan=#EBC79E,Sea Green=#238E68,Motorola Blue=#3ff
+   * Set EXTRA_COLORS = Aquamarine=#70DB93,New Tan=#EBC79E,Sea Green=#238E68,Motorola Blue=#3ff
 Set to 1 if an "Edit" button is to be generated attached to the image. You will still be able to edit it by clicking on the boundary of the image.
-	* Set EDIT_BUTTON = 1
+   * Set EDIT_BUTTON = 1
 Edit text defined here so you can change it for local languages. Text is shown when you hover over the image, and for the edit button. %<nop>F% will be replaced by the drawing name.
-	* Set EDIT_TEXT = Edit drawing '%F%' (requires a Java 1.1 enabled browser)
+   * Set EDIT_TEXT = Edit drawing '%F%' (requires a Java 1.1 enabled browser)
 
 ---+++ Plugin Installation Instructions
 %$INSTALL_INSTRUCTIONS%
-	* To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. <br />
-	%DRAWING{empty}%
-	* Here's an example using an image map. Move the mouse over the image and watch the status bar.
-	%DRAWING{example}%
+   * To test if the plugin is correctly installed, view this topic in the installation and you should see a placeholder box below. <br />
+   %DRAWING{empty}%
+   * Here's an example using an image map. Move the mouse over the image and watch the status bar.
+   %DRAWING{example}%
+   
+   * %X% *Upgrading from older versions of the plugin* requires that you manually delete the file =templates/jhotdraw.pattern.tmpl=. Otherwise the plugin fails on any attempt to edit a drawing
 
 ---+++ Known Problems
-If you add a map to a drawing by setting a URL on any of the figures a map file is created. If you subsequently remove all the URLs from figures in the drawing the map still exists, but is now empty. There is no way to remove the map other than by manually moving the attachment.
+
+   * %X% Versions since 13 Oct 2009 will only work with Foswiki 1.0.7 or later and only with Foswiki having {Validation}{Method} set to the high security setting of 'strikeone' in configure (recommended anyway). Look out for updates of the plugin as this will naturally be fixed in future versions. If you run Foswiki 1.0.6 or older please download the 16 Jun 2009 version of the plugin (which you can download as [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.zip;rev=6][old zip]] or [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.tgz;rev=6][old tgz]])
+
+   * If you add a map to a drawing by setting a URL on any of the figures a map file is created. If you subsequently remove all the URLs from figures in the drawing the map still exists, but is now empty. There is no way to remove the map other than by manually moving the attachment.
 
 ---+++ Plugin Info
 
@@ -82,7 +87,8 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
 |  Change History: | |
-|  13 Oct 2009 | Foswiki:Tasks:Item2160: compatibility with 1.0.7, plus UI and upload performance improvements |
+|  11 Jan 2010 | Foswikitask:Item2620 and Foswikitask:Item2614. Documented that upgraders must delete any old templates/jhotdraw.pattern.tmpl file. Documented that because of a bug the plugin only works with 1.0.7 or later and with {Validation}{Method} = 'strikeone'. Provided links to older versions for those not yet at Foswiki 1.0.7. |
+|  13 Oct 2009 | Foswikitask:Item2160: compatibility with 1.0.7, plus UI and upload performance improvements |
 |  16 Jun 2009 | Foswikitask:Item8079: handling of drawing names with spaces and other converted characters corrected |
 |  05 Feb 2009 | Foswikitask:Item997: must be able to show edit link correctly on imported TWiki drawings. Foswikitask:Item997: fixed problem with links in maps when the link had no trailing anchor introduced in previous version. The fix also enables using macros in links. |
 |  31 Jan 2009 | Foswikitask:Item415: must check user is authenticated as well as checking change access |
@@ -118,12 +124,12 @@ If you add a map to a drawing by setting a URL on any of the figures a map file 
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
 |  Feedback: | http://foswiki.org/Extensions/%TOPIC%Dev |
 
-	* JHotDraw is Copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._
-	* %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
-	* %TOPIC% uses some ideas of <a href="http://www.eng.untech.com/serg/bin/KmWiki?Load=FrontPage">KmWiki</a> drawing applet.
-	* Copyright 2000 by Peter Thoeny, Peter@Thoeny.com. It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies.
-	* Copyright &copy; 2001 Motorola. All Rights Reserved.
-	* Copyright &copy; 2003-2008 Crawford Currie http://www.c-dot.co.uk
-	* Foswiki version: &copy; 2008 Foswiki Contributors
+   * JHotDraw is Copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._
+   * %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
+   * %TOPIC% uses some ideas of <a href="http://www.eng.untech.com/serg/bin/KmWiki?Load=FrontPage">KmWiki</a> drawing applet.
+   * Copyright 2000 by Peter Thoeny, Peter@Thoeny.com. It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies.
+   * Copyright &copy; 2001 Motorola. All Rights Reserved.
+   * Copyright &copy; 2003-2008 Crawford Currie http://www.c-dot.co.uk
+   * Foswiki version: &copy; 2008 Foswiki Contributors
 
 

@@ -30,7 +30,7 @@ use MIME::Base64 ();
 use Encode ();
 
 our $VERSION = '$Rev$';
-our $RELEASE = '13 Oct 2009';
+our $RELEASE = '11 Jan 2010';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
