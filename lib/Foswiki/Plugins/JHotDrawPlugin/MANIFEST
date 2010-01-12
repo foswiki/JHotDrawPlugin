@@ -1,6 +1,12 @@
 data/System/JHotDrawPlugin.txt
 lib/Foswiki/Plugins/JHotDrawPlugin.pm
 lib/Foswiki/Plugins/JHotDrawPlugin/source.zip Zip of java sources
+pub/System/JHotDrawPlugin/jhotdraw.jar JAR file for applet
+pub/System/JHotDrawPlugin/jhotdraw.js Compressed javascript
+pub/System/JHotDrawPlugin/jhotdraw_src.js Javascript source
+templates/jhotdraw.tmpl Template for drawing editor
+templates/jhotdraw.nat.tmpl NatSkin specific template instantiation
+!noci
 pub/System/JHotDrawPlugin/ATEXT1.gif
 pub/System/JHotDrawPlugin/ATEXT2.gif
 pub/System/JHotDrawPlugin/ATEXT3.gif
@@ -56,8 +62,3 @@ pub/System/JHotDrawPlugin/URL1.gif
 pub/System/JHotDrawPlugin/URL2.gif
 pub/System/JHotDrawPlugin/URL3.gif
 pub/System/JHotDrawPlugin/screenshot.png
-pub/System/JHotDrawPlugin/jhotdraw.jar JAR file for applet
-pub/System/JHotDrawPlugin/jhotdraw.js Compressed javascript
-pub/System/JHotDrawPlugin/jhotdraw_src.js Javascript source
-templates/jhotdraw.tmpl Template for drawing editor
-

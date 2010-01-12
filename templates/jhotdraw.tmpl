@@ -5,7 +5,7 @@
 %TMPL:DEF{"pagetitle"}%%TMPL:P{"heading"}%%TMPL:END%
 %TMPL:DEF{"titleaction"}% JHotDraw: %TMPL:END%
 %TMPL:DEF{"heading"}% Edit <nop>JHotDraw figure '%DRAWINGNAME%' %TMPL:END%
-%TMPL:DEF{"content"}%
+%TMPL:DEF{"content"}%%TMPL:P{"jhotdrawmisc"}%
 <applet code="CH.ifa.draw.foswiki.FoswikiDraw.class" id="mhdapp" name="mhdapp" archive="%PUBURLPATH%/%SYSTEMWEB%/JHotDrawPlugin/jhotdraw.jar" width="100%" height="75%" MAYSCRIPT>
 <param name="topic" value="%WEB%.%TOPIC%" />
 <param name="drawingurl" value="%ATTACHURLPATH%" />

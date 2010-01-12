@@ -72,13 +72,13 @@ Edit text defined here so you can change it for local languages. Text is shown w
    * Here's an example using an image map. Move the mouse over the image and watch the status bar.
    %DRAWING{example}%
    
-   * %X% *Upgrading from older versions of the plugin* requires that you manually delete the file =templates/jhotdraw.pattern.tmpl=. Otherwise the plugin fails on any attempt to edit a drawing
-
 ---+++ Known Problems
 
    * %X% Versions since 13 Oct 2009 will only work with Foswiki 1.0.7 or later and only with Foswiki having {Validation}{Method} set to the high security setting of 'strikeone' in configure (recommended anyway). Look out for updates of the plugin as this will naturally be fixed in future versions. If you run Foswiki 1.0.6 or older please download the 16 Jun 2009 version of the plugin (which you can download as [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.zip;rev=6][old zip]] or [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.tgz;rev=6][old tgz]])
 
    * If you add a map to a drawing by setting a URL on any of the figures a map file is created. If you subsequently remove all the URLs from figures in the drawing the map still exists, but is now empty. There is no way to remove the map other than by manually moving the attachment.
+
+   * %X% *Upgrading from older versions of the plugin* requires that you manually delete the file =templates/jhotdraw.pattern.tmpl=. Otherwise the plugin fails on any attempt to edit a drawing
 
 ---+++ Plugin Info
 
@@ -87,6 +87,7 @@ Edit text defined here so you can change it for local languages. Text is shown w
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
 |  Change History: | |
+|  13 Jan 2010 | Foswikitask:Item2624: Help Foswiki:Extensions.JHotDrawPlugin work correctly under Foswiki:Extensions.NatSkin |
 |  11 Jan 2010 | Foswikitask:Item2620 and Foswikitask:Item2614. Documented that upgraders must delete any old templates/jhotdraw.pattern.tmpl file. Documented that because of a bug the plugin only works with 1.0.7 or later and with {Validation}{Method} = 'strikeone'. Provided links to older versions for those not yet at Foswiki 1.0.7. |
 |  13 Oct 2009 | Foswikitask:Item2160: compatibility with 1.0.7, plus UI and upload performance improvements |
 |  16 Jun 2009 | Foswikitask:Item8079: handling of drawing names with spaces and other converted characters corrected |

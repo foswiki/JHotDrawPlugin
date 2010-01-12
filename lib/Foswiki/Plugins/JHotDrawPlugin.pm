@@ -30,7 +30,7 @@ use MIME::Base64 ();
 use Encode ();
 
 our $VERSION = '$Rev$';
-our $RELEASE = '11 Jan 2010';
+our $RELEASE = '13 Jan 2010';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
@@ -199,7 +199,7 @@ sub _restEdit {
     }
     Foswiki::Func::setPreferencesValue('DRAWINGNAME', $drawing);
     my $src = (DEBUG) ? '_src' : '';
-    Foswiki::Func::addToHEAD( 'JHOTDRAWPLUGIN', <<JS);
+    Foswiki::Func::addToHEAD( 'JHOTDRAWPLUGIN', <<"JS", 'JHOTDRAWPLUGIN::DEPS');
 <script type="text/javascript" src="$Foswiki::cfg{PubUrlPath}/$Foswiki::cfg{SystemWebName}/JHotDrawPlugin/jhotdraw$src.js"></script>
 JS
 
