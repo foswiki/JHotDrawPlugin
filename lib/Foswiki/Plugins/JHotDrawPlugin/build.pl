@@ -13,7 +13,8 @@ use Foswiki::Contrib::Build;
 
 # Declare our build package
 package JHotDrawPluginBuild;
-use base 'Foswiki::Contrib::Build';
+use Foswiki::Contrib::Build;
+our @ISA = qw( Foswiki::Contrib::Build );
 
 sub new {
     my $class = shift;
