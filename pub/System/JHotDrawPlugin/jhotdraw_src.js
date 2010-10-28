@@ -106,8 +106,7 @@ var JHD = {
     }
 };
 
-foswiki.Event.addLoadEvent(
-    function () {
-        JHD.start();
-    });
+$(document).ready(function() {
+	JHD.start();
+});
 

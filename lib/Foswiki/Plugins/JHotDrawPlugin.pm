@@ -199,7 +199,7 @@ sub _restEdit {
     }
     Foswiki::Func::setPreferencesValue('DRAWINGNAME', $drawing);
     my $src = (DEBUG) ? '_src' : '';
-    Foswiki::Func::addToHEAD( 'JHOTDRAWPLUGIN', <<"JS", 'JHOTDRAWPLUGIN::DEPS');
+    Foswiki::Func::addToZone( 'script', 'JHOTDRAWPLUGIN', <<"JS", 'JQUERYPLUGIN::FOSWIKI');
 <script type="text/javascript" src="$Foswiki::cfg{PubUrlPath}/$Foswiki::cfg{SystemWebName}/JHotDrawPlugin/jhotdraw$src.js"></script>
 JS
 
