@@ -41,13 +41,15 @@ var JHD = {
         form.push('Content-Disposition: form-data; name="drawing"\r\n\r\n'
                   + drawing);
 
-        try {
-            foswikiStrikeOne(document.saveform);
-            form.push(
-                'Content-Disposition: form-data; name="validation_key"\r\n\r\n'
-                + document.saveform.validation_key.value);
-        } catch (e) {
-            alert(e);
+        if (typeof(foswikiStrikeOne) === "function") {
+            try {
+                foswikiStrikeOne(document.saveform);
+                form.push(
+                    'Content-Disposition: form-data; name="validation_key"\r\n\r\n'
+                    + document.saveform.validation_key.value);
+            } catch (e) {
+                alert(e);
+            }
         }
 
         var file = [];

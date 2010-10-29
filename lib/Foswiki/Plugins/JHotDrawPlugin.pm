@@ -30,7 +30,7 @@ use MIME::Base64 ();
 use Encode ();
 
 our $VERSION = '$Rev$';
-our $RELEASE = '13 Jan 2010';
+our $RELEASE = '29 Oct 2010';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
@@ -219,15 +219,18 @@ sub _restUpload {
     my ( $session, $plugin, $verb, $response ) = @_;
     my $query = Foswiki::Func::getCgiQuery();
 
-    require Foswiki::Validation;
-    my $nonce = $query->param('validation_key');
-    if ( !defined($nonce)
-        || !Foswiki::Validation::isValidNonce( $session->getCGISession(),
-            $nonce ) )
-    {
-        returnRESTResult( $response, 403, "Invalid validation key" );
-        return;
+    if ( $Foswiki::cfg{Validation}{Method} eq 'strikeone' ) {
+        require Foswiki::Validation;
+        my $nonce = $query->param('validation_key');
+        if ( !defined($nonce)
+            || !Foswiki::Validation::isValidNonce( $session->getCGISession(),
+                $nonce ) )
+        {
+            returnRESTResult( $response, 403, "Invalid validation key" );
+            return;
+        }
     }
+    
     my ($web, $topic) = _getTopic( @_ );
 
     # Basename of the drawing

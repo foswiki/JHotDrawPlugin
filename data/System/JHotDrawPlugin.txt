@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1144799477" format="1.1" version="1.1"}%
+%META:TOPICINFO{author="ProjectContributor" date="1288389452" format="1.1" version="1"}%
 ---+!! <nop>%TOPIC%
 
 <img src="%ATTACHURLPATH%/screenshot.png" alt="screenshot.png" style="float:right" />
@@ -20,19 +20,19 @@ Browser support for Java 1.1 or later is required.
 ---+++ Tools
 
 The tools on the left create or manipulate figures.
-| <img src="%ATTACHURLPATH%/SEL1.gif" width="24" height="24" alt="Selection"> | selects, moves or resizes a figure; the shift-key toggles the selection. Dragging the selection tool in the background selects the figures within the dragged rectangle. |
-| <img src="%ATTACHURLPATH%/TEXT1.gif" width="24" height="24" alt="Text"> | creates a new or edits an existing text figure |
-| <img src="%ATTACHURLPATH%/ATEXT1.gif" width="24" height="24" alt="Connected Text"> | creates a new text figure and attaches it to the clicked figure. Once a text figure is attached it remains connected to the figure. |
-| <img src="%ATTACHURLPATH%/RECT1.gif" width="24" height="24" alt="Rectangle"> | creates a rectangle figure |
-| <img src="%ATTACHURLPATH%/RRECT1.gif" width="24" height="24" alt="Round Rectangle"> | creates a round rectangle figure |
-| <img src="%ATTACHURLPATH%/ELLIPSE1.gif" width="24" height="24" alt="Ellipse"> | creates an ellipse figure |
-| <img src="%ATTACHURLPATH%/LINE1.gif" width="24" height="24" alt="Line"> | creates a line figure |
-| <img src="%ATTACHURLPATH%/CONN1.gif" width="24" height="24" alt="Connection Line"> | creates or adjusts connections between figures. A connection is split into segments by dragging a point on the connection. To join two segments click the end point of a segment |
-| <img src="%ATTACHURLPATH%/OCONN1.gif" width="24" height="24" alt="Elbow Connection Line"> | creates an elbow connection and offers the same features as the ordinary connection tool |
-| <img src="%ATTACHURLPATH%/SCRIBBL1.gif" width="24" height="24" alt="Scribble"> | creates a scribble figure; dragging the mouse creates a smooth line while successive clicks yields a polyline figure. A two-button click terminates the figure. |
-| <img src="%ATTACHURLPATH%/POLYGON1.gif" width="24" height="24" alt="Polygon"> | creates a polygon figure; dragging the mouse creates a smooth border while successive clicks yields a polyline border. A two-button click or the ESCAPE key terminates the figure. |
-| <img src="%ATTACHURLPATH%/BORDDEC1.gif" width="24" height="24" alt="Border"> | decorates the clicked figure with a border |
-| <img src="%ATTACHURLPATH%/URL1.gif" width="24" height="24" alt="URL"> | adds a sensitive area to the figure that will redirect to a URL. If an image contains any sensitive areas it can only be selected for edit by clicking on the boundary or (if enabled) the attached Edit button. You can use wikiwords and web.topic wiki link expressions as well as full URLs. |
+| <img src="%ATTACHURLPATH%/SEL3.gif" width="24" height="24" alt="Selection"> | selects, moves or resizes a figure; the shift-key toggles the selection. Dragging the selection tool in the background selects the figures within the dragged rectangle. |
+| <img src="%ATTACHURLPATH%/TEXT3.gif" width="24" height="24" alt="Text"> | creates a new or edits an existing text figure |
+| <img src="%ATTACHURLPATH%/ATEXT3.gif" width="24" height="24" alt="Connected Text"> | creates a new text figure and attaches it to the clicked figure. Once a text figure is attached it remains connected to the figure. |
+| <img src="%ATTACHURLPATH%/RECT3.gif" width="24" height="24" alt="Rectangle"> | creates a rectangle figure |
+| <img src="%ATTACHURLPATH%/RRECT3.gif" width="24" height="24" alt="Round Rectangle"> | creates a round rectangle figure |
+| <img src="%ATTACHURLPATH%/ELLIPSE3.gif" width="24" height="24" alt="Ellipse"> | creates an ellipse figure |
+| <img src="%ATTACHURLPATH%/LINE3.gif" width="24" height="24" alt="Line"> | creates a line figure |
+| <img src="%ATTACHURLPATH%/CONN2.gif" width="24" height="24" alt="Connection Line"> | creates or adjusts connections between figures. A connection is split into segments by dragging a point on the connection. To join two segments click the end point of a segment |
+| <img src="%ATTACHURLPATH%/OCONN3.gif" width="24" height="24" alt="Elbow Connection Line"> | creates an elbow connection and offers the same features as the ordinary connection tool |
+| <img src="%ATTACHURLPATH%/SCRIBBL2.gif" width="24" height="24" alt="Scribble"> | creates a scribble figure; dragging the mouse creates a smooth line while successive clicks yields a polyline figure. A two-button click terminates the figure. |
+| <img src="%ATTACHURLPATH%/POLYGON3.gif" width="24" height="24" alt="Polygon"> | creates a polygon figure; dragging the mouse creates a smooth border while successive clicks yields a polyline border. A two-button click or the ESCAPE key terminates the figure. |
+| <img src="%ATTACHURLPATH%/BORDDEC3.gif" width="24" height="24" alt="Border"> | decorates the clicked figure with a border |
+| <img src="%ATTACHURLPATH%/URL3.gif" width="24" height="24" alt="URL"> | adds a sensitive area to the figure that will redirect to a URL. If an image contains any sensitive areas it can only be selected for edit by clicking on the boundary or (if enabled) the attached Edit button. You can use wikiwords and web.topic wiki link expressions as well as full URLs. |
 
 ---+++ Handles
 
@@ -72,10 +72,6 @@ Edit text defined here so you can change it for local languages. Text is shown w
    * Here's an example using an image map. Move the mouse over the image and watch the status bar.
    %DRAWING{example}%
    
----+++ Known Problems
-
-   * %X% Versions since 13 Oct 2009 will only work with Foswiki 1.0.7 or later and only with Foswiki having {Validation}{Method} set to the high security setting of 'strikeone' in configure (recommended anyway). Look out for updates of the plugin as this will naturally be fixed in future versions. If you run Foswiki 1.0.6 or older please download the 16 Jun 2009 version of the plugin (which you can download as [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.zip;rev=6][old zip]] or [[http://foswiki.org/bin/viewfile/Extensions/JHotDrawPlugin?filename=JHotDrawPlugin.tgz;rev=6][old tgz]])
-
    * If you add a map to a drawing by setting a URL on any of the figures a map file is created. If you subsequently remove all the URLs from figures in the drawing the map still exists, but is now empty. There is no way to remove the map other than by manually moving the attachment.
 
    * %X% *Upgrading from older versions of the plugin* requires that you manually delete the file =templates/jhotdraw.pattern.tmpl=. Otherwise the plugin fails on any attempt to edit a drawing
@@ -87,6 +83,7 @@ Edit text defined here so you can change it for local languages. Text is shown w
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
 |  Change History: | |
+|  29 Oct 2010 | Foswikitask:Item2614: Fix so the plugin will work with all setting of validation methis, strikeone, embedded, and none.<br /> Foswikitask:Item9917: Fix so plugin can save and exit in Foswiki 1.1.X. This also adds a dependency of !JQueryPlugin and !ZonePlugin for the plugin to be used in old 1.0 installations only. <br /> Foswikitask:Item8387: Plugin now works in other skins than Pattern and Nat. <br /> Foswikitask:Item8558: Added all the graphic files used on plugin topic as attachments in meta. Replaced some small icons by the best version |
 |  13 Jan 2010 | Foswikitask:Item2624: Help Foswiki:Extensions.JHotDrawPlugin work correctly under Foswiki:Extensions.NatSkin |
 |  11 Jan 2010 | Foswikitask:Item2620 and Foswikitask:Item2614. Documented that upgraders must delete any old templates/jhotdraw.pattern.tmpl file. Documented that because of a bug the plugin only works with 1.0.7 or later and with {Validation}{Method} = 'strikeone'. Provided links to older versions for those not yet at Foswiki 1.0.7. |
 |  13 Oct 2009 | Foswikitask:Item2160: compatibility with 1.0.7, plus UI and upload performance improvements |
@@ -120,10 +117,10 @@ Edit text defined here so you can change it for local languages. Text is shown w
 |  20 Feb 2002 | Merged TWiki:Main/RobWalker's fixes for text attached to figures |
 |  01 Oct 2001 | Updated this text |
 |  23 Sep 2001 | Initial version |
-|  2000 | Peter Thoeny created <nop>TWikiDraw based on JHotDraw (<nop>TWikiDraw applet that allows you to save a drawing as a =.draw= and a =.gif= file. New =%<nop>DRAWING%= variable to insert a drawing into any TWiki topic. New =oopstwikidraw.tmpl= template that contains the <nop>TWikiDraw applet. |
-|  Dependencies: | Java 1.1 enabled browser<br />%$DEPENDENCIES% |
-|  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
-|  Feedback: | http://foswiki.org/Extensions/%TOPIC%Dev |
+|  2000 | Peter Thoeny created <nop>TWikiDraw based on !JHotDraw (<nop>TWikiDraw applet that allows you to save a drawing as a =.draw= and a =.gif= file. New =%<nop>DRAWING%= variable to insert a drawing into any TWiki topic. New =oopstwikidraw.tmpl= template that contains the <nop>TWikiDraw applet. |
+|  Dependencies: | Java enabled browser<br />%$DEPENDENCIES% |
+|  Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% | 
 
    * JHotDraw is Copyright 1996, 1997 by <a href="http://www.ifa.ch/">IFA Informatik</a> and Erich Gamma, erich_gamma@acm.org . _It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies._
    * %TOPIC% uses <a href="http://www.acme.com/java/">ACME Labs</a>' <nop>GifEncoder to convert a drawing into a GIF file format. (<nop>GifEncoder is Copyright &copy;1996,1998 by Jef Poskanzer, jef@acme.com . All rights reserved. _<font size="-6"> THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. )</font>_
@@ -131,6 +128,22 @@ Edit text defined here so you can change it for local languages. Text is shown w
    * Copyright 2000 by Peter Thoeny, Peter@Thoeny.com. It is hereby granted that this software can be used, copied, modified, and distributed without fee provided that this copyright notice appears in all copies.
    * Copyright &copy; 2001 Motorola. All Rights Reserved.
    * Copyright &copy; 2003-2008 Crawford Currie http://www.c-dot.co.uk
-   * Foswiki version: &copy; 2008 Foswiki Contributors
+   * Foswiki version: &copy; 2008-2010 Foswiki Contributors
 
-
+%META:FILEATTACHMENT{name="screenshot.png" attachment="screenshot.png" attr="h" comment="" date="1288389452" path="screenshot.png" size="9794" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="example.draw" attachment="example.draw" attr="h" comment="" date="1288389452" path="example.draw" size="29114" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="ATEXT3.gif" attachment="ATEXT3.gif" attr="h" comment="" date="1288389452" path="ATEXT3.gif" size="191" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="BORDDEC3.gif" attachment="BORDDEC3.gif" attr="h" comment="" date="1288389452" path="BORDDEC3.gif" size="186" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="CONN2.gif" attachment="CONN2.gif" attr="h" comment="" date="1288389452" path="CONN2.gif" size="161" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="ELLIPSE3.gif" attachment="ELLIPSE3.gif" attr="h" comment="" date="1288389452" path="ELLIPSE3.gif" size="202" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="example.gif" attachment="example.gif" attr="h" comment="" date="1288389452" path="example.gif" size="9910" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="LINE3.gif" attachment="LINE3.gif" attr="h" comment="" date="1288389452" path="LINE3.gif" size="164" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="OCONN3.gif" attachment="OCONN3.gif" attr="h" comment="" date="1288389452" path="OCONN3.gif" size="170" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="POLYGON3.gif" attachment="POLYGON3.gif" attr="h" comment="" date="1288389452" path="POLYGON3.gif" size="189" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="RECT3.gif" attachment="RECT3.gif" attr="h" comment="" date="1288389452" path="RECT3.gif" size="190" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="RRECT3.gif" attachment="RRECT3.gif" attr="h" comment="" date="1288389452" path="RRECT3.gif" size="190" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="SCRIBBL2.gif" attachment="SCRIBBL2.gif" attr="h" comment="" date="1288389452" path="SCRIBBL2.gif" size="169" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="SEL3.gif" attachment="SEL3.gif" attr="h" comment="" date="1288389452" path="SEL3.gif" size="192" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="TEXT3.gif" attachment="TEXT3.gif" attr="h" comment="" date="1288389452" path="TEXT3.gif" size="186" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="URL3.gif" attachment="URL3.gif" attr="h" comment="" date="1288389452" path="URL3.gif" size="230" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="example.map" attachment="example.map" attr="h" comment="" date="1288389452" path="example.map" size="3732" user="ProjectContributor" version="1"}%
