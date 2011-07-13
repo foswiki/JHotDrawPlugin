@@ -25,18 +25,18 @@ use strict;
 
 use Assert;
 
-use File::Temp ();
+use File::Temp   ();
 use MIME::Base64 ();
-use Encode ();
+use Encode       ();
 
-our $VERSION = '$Rev$';
-our $RELEASE = '29 Oct 2010';
+our $VERSION          = '$Rev$';
+our $RELEASE          = '29 Oct 2010';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
     Foswiki::Func::registerTagHandler( 'DRAWING', \&_DRAWING );
 
-    Foswiki::Func::registerRESTHandler( 'edit', \&_restEdit );
+    Foswiki::Func::registerRESTHandler( 'edit',   \&_restEdit );
     Foswiki::Func::registerRESTHandler( 'upload', \&_restUpload );
 
     return 1;
@@ -50,7 +50,7 @@ sub _DRAWING {
     $drawingName = ( Foswiki::Func::sanitizeAttachmentName($drawingName) )[0];
 
     my ($imgTime) =
-      Foswiki::Func::getRevisionInfo($web, $topic, 0, "$drawingName.gif");
+      Foswiki::Func::getRevisionInfo( $web, $topic, 0, "$drawingName.gif" );
     my $imgParams = { src => "%ATTACHURLPATH%/$drawingName.gif?t=$imgTime" };
 
     # The edit URL is a rest handler, but we still like
@@ -66,8 +66,8 @@ sub _DRAWING {
     if ($canEdit) {
         $editUrl = Foswiki::Func::getScriptUrl(
             'JHotDrawPlugin', 'edit', 'rest',
-            topic     => "$web.$topic",
-            drawing   => $drawingName
+            topic   => "$web.$topic",
+            drawing => $drawingName
         );
         $editLinkParams->{href} = $editUrl;
         $edittext =
@@ -76,7 +76,7 @@ sub _DRAWING {
         $edittext =~ s/%F%/$drawingName/g;
     }
 
-    my $result = '';
+    my $result  = '';
     my $mapFile = "$drawingName.map";
     if ( Foswiki::Func::attachmentExists( $web, $topic, $mapFile ) ) {
         my $map = Foswiki::Func::readAttachment( $web, $topic, $mapFile );
@@ -151,7 +151,7 @@ sub returnRESTResult {
         -status  => $status,
         -type    => 'text/plain',
         -charset => 'UTF-8'
-       );
+    );
     $response->print($text);
 
     print STDERR $text if ( $status >= 400 );
@@ -164,42 +164,53 @@ sub _getTopic {
       Foswiki::Func::normalizeWebTopicName( undef, $query->param('topic') );
 
     # Check that we have access to the topic
-    unless (Foswiki::Func::checkAccessPermission(
-        'CHANGE', Foswiki::Func::getCanonicalUserID(), undef, $topic, $web )) {
-        returnRESTResult( $response, 401, "Access denied");
+    unless (
+        Foswiki::Func::checkAccessPermission(
+            'CHANGE', Foswiki::Func::getCanonicalUserID(),
+            undef, $topic, $web
+        )
+      )
+    {
+        returnRESTResult( $response, 401, "Access denied" );
         return ();
     }
-    $web = Foswiki::Sandbox::untaint(
-        $web, \&Foswiki::Sandbox::validateWebName );
+    $web =
+      Foswiki::Sandbox::untaint( $web, \&Foswiki::Sandbox::validateWebName );
     $topic = Foswiki::Sandbox::untaint( $topic,
         \&Foswiki::Sandbox::validateTopicName );
     unless ( defined $web && defined $topic ) {
         returnRESTResult( $response, 401, "Access denied" );
         return ();
     }
-    unless ( Foswiki::Func::checkAccessPermission(
-        'CHANGE', Foswiki::Func::getWikiName(), undef, $topic, $web )) {
+    unless (
+        Foswiki::Func::checkAccessPermission(
+            'CHANGE', Foswiki::Func::getWikiName(),
+            undef, $topic, $web
+        )
+      )
+    {
         returnRESTResult( $response, 401, "Access denied" );
         return ();
     }
-    return ($web, $topic);
+    return ( $web, $topic );
 }
 
 # REST handler
 sub _restEdit {
     my ( $session, $plugin, $verb, $response ) = @_;
-    my ($web, $topic) = _getTopic( @_ );
+    my ( $web, $topic ) = _getTopic(@_);
     return unless $web && $topic;
 
-    my $query = Foswiki::Func::getCgiQuery();
+    my $query   = Foswiki::Func::getCgiQuery();
     my $drawing = $query->param('drawing');
     unless ($drawing) {
         returnRESTResult( $response, 400, "No drawing" );
         return;
     }
-    Foswiki::Func::setPreferencesValue('DRAWINGNAME', $drawing);
+    Foswiki::Func::setPreferencesValue( 'DRAWINGNAME', $drawing );
     my $src = (DEBUG) ? '_src' : '';
-    Foswiki::Func::addToZone( 'script', 'JHOTDRAWPLUGIN', <<"JS", 'JQUERYPLUGIN::FOSWIKI');
+    Foswiki::Func::addToZone( 'script', 'JHOTDRAWPLUGIN',
+        <<"JS", 'JQUERYPLUGIN::FOSWIKI' );
 <script type="text/javascript" src="$Foswiki::cfg{PubUrlPath}/$Foswiki::cfg{SystemWebName}/JHotDrawPlugin/jhotdraw$src.js"></script>
 JS
 
@@ -222,20 +233,23 @@ sub _restUpload {
     if ( $Foswiki::cfg{Validation}{Method} eq 'strikeone' ) {
         require Foswiki::Validation;
         my $nonce = $query->param('validation_key');
-        if ( !defined($nonce)
-            || !Foswiki::Validation::isValidNonce( $session->getCGISession(),
-                $nonce ) )
+        if (
+            !defined($nonce)
+            || !Foswiki::Validation::isValidNonce(
+                $session->getCGISession(), $nonce
+            )
+          )
         {
             returnRESTResult( $response, 403, "Invalid validation key" );
             return;
         }
     }
-    
-    my ($web, $topic) = _getTopic( @_ );
+
+    my ( $web, $topic ) = _getTopic(@_);
 
     # Basename of the drawing
-    my $fileName    = $query->param('drawing');
-    ASSERT($fileName, $query->Dump()) if DEBUG;
+    my $fileName = $query->param('drawing');
+    ASSERT( $fileName, $query->Dump() ) if DEBUG;
 
     my $origName = $fileName;
 
@@ -248,11 +262,12 @@ sub _restUpload {
     foreach my $ftype (qw(draw gif map svg)) {
         my $content = $query->param($ftype);
         next unless defined $content;
-        if ($ftype eq 'gif') {
+        if ( $ftype eq 'gif' ) {
+
             # GIF is passed base64 encoded
             $content = MIME::Base64::decode_base64($content);
         }
-        my $ft = new File::Temp(); # will be unlinked on destroy
+        my $ft = new File::Temp();    # will be unlinked on destroy
         my $fn = $ft->filename();
         binmode($ft);
         print $ft $content;
@@ -262,22 +277,24 @@ sub _restUpload {
             $web, $topic,
             "$fileName.$ftype",
             {
-                dontlog     => !$Foswiki::cfg{Log}{upload},
-                comment     => "JHotDrawPlugin file",
-                filedate    => time(),
-                file        => $fn,
-            });
+                dontlog  => !$Foswiki::cfg{Log}{upload},
+                comment  => "JHotDrawPlugin file",
+                filedate => time(),
+                file     => $fn,
+            }
+        );
         if ($error) {
             print STDERR "Attachment save error $error\n";
-            push(@errors, $error );
+            push( @errors, $error );
         }
     }
 
-    if (scalar(@errors)) {
+    if ( scalar(@errors) ) {
         print STDERR "JHotDraw SAVE FAILED\n";
-        returnRESTResult( $response, 500, join(' ', @errors ));
-    } else {
-        returnRESTResult( $response, 200, 'OK');
+        returnRESTResult( $response, 500, join( ' ', @errors ) );
+    }
+    else {
+        returnRESTResult( $response, 200, 'OK' );
     }
 
     return undef;
