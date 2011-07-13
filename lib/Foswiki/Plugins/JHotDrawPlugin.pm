@@ -245,7 +245,7 @@ sub _restUpload {
 
     # Save a file for each file type
     my @errors;
-    foreach my $ftype qw(draw gif map svg) {
+    foreach my $ftype (qw(draw gif map svg)) {
         my $content = $query->param($ftype);
         next unless defined $content;
         if ($ftype eq 'gif') {
