@@ -40,7 +40,7 @@ sub initPlugin {
         'edit',
         \&_restEdit,
         authenticate => 1,  # Set to 0 if handler should be useable by WikiGuest
-        validate     => 1,  # Set to 0 to disable StrikeOne CSRF protection
+        validate     => 0,  # Set to 0 to disable StrikeOne CSRF protection
         http_allow =>
           'GET,POST',       # Set to 'GET,POST' to allow use HTTP GET and POST
         description => 'Edit handler for JHotDrawPlugin'
@@ -49,7 +49,7 @@ sub initPlugin {
         'upload',
         \&_restUpload,
         authenticate => 1,  # Set to 0 if handler should be useable by WikiGuest
-        validate     => 1,  # Set to 0 to disable StrikeOne CSRF protection
+        validate     => 0,  # Set to 0 to disable StrikeOne CSRF protection
         http_allow => 'POST', # Set to 'GET,POST' to allow use HTTP GET and POST
         description => 'Upload handler for JHotDrawPlugin'
     );
