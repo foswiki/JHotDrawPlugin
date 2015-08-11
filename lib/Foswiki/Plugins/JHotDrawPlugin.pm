@@ -48,7 +48,8 @@ sub initPlugin {
     Foswiki::Func::registerRESTHandler(
         'upload',
         \&_restUpload,
-        validate   => 1,      # Set to 0 to disable StrikeOne CSRF protection
+        authenticate => 1,  # Set to 0 if handler should be useable by WikiGuest
+        validate     => 1,  # Set to 0 to disable StrikeOne CSRF protection
         http_allow => 'POST', # Set to 'GET,POST' to allow use HTTP GET and POST
         description => 'Upload handler for JHotDrawPlugin'
     );
