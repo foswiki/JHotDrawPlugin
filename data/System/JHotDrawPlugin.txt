@@ -83,6 +83,7 @@ Edit text defined here so you can change it for local languages. Text is shown w
 |  Version: | %$VERSION% |
 |  Release: | %$RELEASE% |
 |  Change History: | |
+|  11 Aug 2015 | Foswikitask:Item13613: JHotDrawPlugin is required to enable GET and strikeone to work with Foswiki 2.0 and newer. <br /> Foswikitask:Item13614: JHotDrawPlugin should hide the created attachments <br /> Foswikitask:Item10963:  Put parentheses around qw() as it throws a warning on Perl 5.14 |
 |  29 Oct 2010 | Foswikitask:Item2614: Fix so the plugin will work with all setting of validation methis, strikeone, embedded, and none.<br /> Foswikitask:Item9917: Fix so plugin can save and exit in Foswiki 1.1.X. This also adds a dependency of !JQueryPlugin and !ZonePlugin for the plugin to be used in old 1.0 installations only. <br /> Foswikitask:Item8387: Plugin now works in other skins than Pattern and Nat. <br /> Foswikitask:Item8558: Added all the graphic files used on plugin topic as attachments in meta. Replaced some small icons by the best version |
 |  13 Jan 2010 | Foswikitask:Item2624: Help Foswiki:Extensions.JHotDrawPlugin work correctly under Foswiki:Extensions.NatSkin |
 |  11 Jan 2010 | Foswikitask:Item2620 and Foswikitask:Item2614. Documented that upgraders must delete any old templates/jhotdraw.pattern.tmpl file. Documented that because of a bug the plugin only works with 1.0.7 or later and with {Validation}{Method} = 'strikeone'. Provided links to older versions for those not yet at Foswiki 1.0.7. |

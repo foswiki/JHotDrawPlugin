@@ -29,15 +29,29 @@ use File::Temp   ();
 use MIME::Base64 ();
 use Encode       ();
 
-our $VERSION          = '$Rev$';
-our $RELEASE          = '29 Oct 2010';
+our $VERSION          = '2.0';
+our $RELEASE          = '11 Aug 2015';
 our $SHORTDESCRIPTION = 'Java Applet based drawing editor';
 
 sub initPlugin {
     Foswiki::Func::registerTagHandler( 'DRAWING', \&_DRAWING );
 
-    Foswiki::Func::registerRESTHandler( 'edit',   \&_restEdit );
-    Foswiki::Func::registerRESTHandler( 'upload', \&_restUpload );
+    Foswiki::Func::registerRESTHandler(
+        'edit',
+        \&_restEdit,
+        authenticate => 1,  # Set to 0 if handler should be useable by WikiGuest
+        validate     => 1,  # Set to 0 to disable StrikeOne CSRF protection
+        http_allow =>
+          'GET,POST',       # Set to 'GET,POST' to allow use HTTP GET and POST
+        description => 'Edit handler for JHotDrawPlugin'
+    );
+    Foswiki::Func::registerRESTHandler(
+        'upload',
+        \&_restUpload,
+        validate   => 1,      # Set to 0 to disable StrikeOne CSRF protection
+        http_allow => 'POST', # Set to 'GET,POST' to allow use HTTP GET and POST
+        description => 'Upload handler for JHotDrawPlugin'
+    );
 
     return 1;
 }
@@ -278,7 +292,8 @@ sub _restUpload {
             "$fileName.$ftype",
             {
                 dontlog  => !$Foswiki::cfg{Log}{upload},
-                comment  => "JHotDrawPlugin file",
+                comment  => "!JHotDrawPlugin file",
+                hide     => 1,
                 filedate => time(),
                 file     => $fn,
             }
